@@ -29,6 +29,7 @@ function App() {
           <Routes>
             <Route index path="/" element={<HomePage />} />
             <Route path="*" element={<ValidationPage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/validation" element={<ValidationPage />} />
             <Route path="/registration" element={<RegistratioPage />} />
             <Route path="/missing" element={<MissingPage />} />
