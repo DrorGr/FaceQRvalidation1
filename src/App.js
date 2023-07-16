@@ -27,10 +27,11 @@ function App() {
           <ResponsiveAppBar />
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
-            <Route exact path="/validation" element={<ValidationPage />} />
-            <Route exact path="/registration" element={<RegistratioPage />} />
-            <Route exact path="/missing" element={<MissingPage />} />
+            <Route path="/" element={<ValidationPage />} />
+            <Route index path="*" element={<ValidationPage />} />
+            <Route path="/validation" element={<ValidationPage />} />
+            <Route path="/registration" element={<RegistratioPage />} />
+            <Route path="/missing" element={<MissingPage />} />
           </Routes>
         </SnackbarProvider>
       </BrowserRouter>
