@@ -75,9 +75,7 @@ function HomePage() {
                 >
                   <CardActionArea
                     component="a"
-                    onClick={() =>
-                      navigate(`"FaceQRvalidation1/#/"${page.title}`)
-                    }
+                    onClick={() => navigate(`${page.title}`)}
                   >
                     <CardContent
                       className={classes.card}
