@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar";
-import { Routes, BrowserRouter, Navigate, Route } from "react-router-dom";
+import { Routes, HashRouter, Navigate, Route } from "react-router-dom";
 import HomePage from "./Components/Pages/HomePage";
 import ValidationPage from "./Components/Pages/ValidationPage";
 import RegistratioPage from "./Components/Pages/RegistratioPage";
@@ -14,7 +14,7 @@ import { SnackbarProvider } from "notistack";
 function App() {
   return (
     <div className="App-header">
-      <BrowserRouter>
+      <HashRouter>
         <SnackbarProvider
           anchorOrigin={{
             // vertical: "top",
@@ -27,14 +27,14 @@ function App() {
           <ResponsiveAppBar />
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <Routes>
-            <Route index path="/" element={<ValidationPage />} />
+            <Route index path="/" element={<HomePage />} />
             <Route path="*" element={<ValidationPage />} />
             <Route path="/validation" element={<ValidationPage />} />
             <Route path="/registration" element={<RegistratioPage />} />
             <Route path="/missing" element={<MissingPage />} />
           </Routes>
         </SnackbarProvider>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
