@@ -60,12 +60,7 @@ function HomePage() {
         <Container>
           <Grid container spacing={2}>
             {pages.map((page) => (
-              <Grid
-                item
-                key={"FaceQRvalidation1/#/" + page.title}
-                xs={12}
-                md={4}
-              >
+              <Grid item key={page.title} xs={12} md={4}>
                 <Card
                   sx={{
                     bgcolor: "transparent",
@@ -81,7 +76,7 @@ function HomePage() {
                   <CardActionArea
                     component="a"
                     onClick={() =>
-                      navigate("/FaceQRvalidation1/#/" + page.link)
+                      navigate(`"FaceQRvalidation1/#/"${page.title}`)
                     }
                   >
                     <CardContent
