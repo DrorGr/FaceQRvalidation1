@@ -27,8 +27,8 @@ function App() {
           <ResponsiveAppBar />
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <Routes>
-            <Route path="/" element={<ValidationPage />} />
-            <Route index path="*" element={<ValidationPage />} />
+            <Route index path="/" element={<ValidationPage />} />
+            <Route path="*" element={<ValidationPage />} />
             <Route path="/validation" element={<ValidationPage />} />
             <Route path="/registration" element={<RegistratioPage />} />
             <Route path="/missing" element={<MissingPage />} />

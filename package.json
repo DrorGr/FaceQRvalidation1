@@ -2,7 +2,7 @@
   "name": "pangea-fv-pwa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://drorgr.github.io/validation",
+  "homepage": "https://drorgr.github.io/FaceQRvalidation1/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
