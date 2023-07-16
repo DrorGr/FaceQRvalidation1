@@ -14,6 +14,7 @@ import { Container } from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import video from "../../assets/backgraund/background-video4.mp4";
 import VideoBackground from "../VideoBackground";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   card: {
@@ -42,6 +43,8 @@ function HomePage() {
   const theme = createTheme();
   const isXsScreen = useMediaQuery("(max-width:600px)");
 
+  const navigate = useNavigate();
+
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -57,7 +60,12 @@ function HomePage() {
         <Container>
           <Grid container spacing={2}>
             {pages.map((page) => (
-              <Grid item key={page.title} xs={12} md={4}>
+              <Grid
+                item
+                key={"FaceQRvalidation1/#/" + page.title}
+                xs={12}
+                md={4}
+              >
                 <Card
                   sx={{
                     bgcolor: "transparent",
@@ -70,8 +78,14 @@ function HomePage() {
                     cursor: "pointer",
                   }}
                 >
-                  <CardActionArea component="a" href={page.link}>
-                    <CardContent className={classes.card} sx={{minHeight:"100px"}}>
+                  <CardActionArea
+                    component="a"
+                    onClick={() => navigate(page.link)}
+                  >
+                    <CardContent
+                      className={classes.card}
+                      sx={{ minHeight: "100px" }}
+                    >
                       {React.cloneElement(page.icon, {
                         sx: { fontSize: 100, color: "white" },
                       })}
