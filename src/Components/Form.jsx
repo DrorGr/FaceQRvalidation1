@@ -16,22 +16,21 @@ const MyForm = ({ onSubmit, initialFormData }) => {
   };
 
   return (
-    <form style={{ outline: "1px solid #ccc", padding: "10px" }}>
+    <form style={{ padding: "10px" }}>
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12} xl={3}>
           <TextField
             name="name"
             label="Name"
             type="name"
-            variant="outlined"
+            // variant="outlined"
             value={formData.name}
             onChange={handleChange}
             margin="normal"
             fullWidth
             autoFocus
-            InputLabelProps={{ style: { color: "white" } }}
-            InputProps={{ style: { color: "white" } }}
-            style={{ color: "white" }}
+            InputLabelProps={{ style: { color: "#071f2a" } }}
+            InputProps={{ style: { color: "#071f2a" } }}
           />
         </Grid>
         <Grid item xs={12} xl={3}>
@@ -39,14 +38,13 @@ const MyForm = ({ onSubmit, initialFormData }) => {
             name="email"
             label="Email"
             type="email"
-            variant="outlined"
+            // variant="outlined"
             value={formData.email}
             onChange={handleChange}
             margin="normal"
             fullWidth
-            InputLabelProps={{ style: { color: "white" } }}
-            InputProps={{ style: { color: "white" } }}
-            style={{ color: "white" }}
+            InputLabelProps={{ style: { color: "#071f2a" } }}
+            InputProps={{ style: { color: "#071f2a" } }}
           />
         </Grid>
         <Grid item xs={12} xl={3}>
@@ -54,14 +52,13 @@ const MyForm = ({ onSubmit, initialFormData }) => {
             name="phone"
             label="Phone"
             type="tel"
-            variant="outlined"
+            // variant="outlined"
             value={formData.phone}
             onChange={handleChange}
             margin="normal"
             fullWidth
-            InputLabelProps={{ style: { color: "white" } }}
-            InputProps={{ style: { color: "white" } }}
-            style={{ color: "white" }}
+            InputLabelProps={{ style: { color: "#071f2a" } }}
+            InputProps={{ style: { color: "#071f2a" } }}
           />
         </Grid>
       </Grid>

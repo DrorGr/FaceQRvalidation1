@@ -48,7 +48,12 @@ const ShareCanvas = ({ canvasRef }) => {
   };
 
   return (
-    <Button variant="contained" onClick={shareCanvas} endIcon={<ShareIcon />}>
+    <Button
+      sx={{ width: "97%", mr: 2 }}
+      variant="contained"
+      onClick={shareCanvas}
+      endIcon={<ShareIcon />}
+    >
       SHARE
     </Button>
   );

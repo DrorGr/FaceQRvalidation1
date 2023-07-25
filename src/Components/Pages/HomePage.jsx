@@ -4,6 +4,8 @@ import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import Grow from "@mui/material/Grow";
+import Box from "@mui/material/Box";
 import {
   SpatialAudioOff as SpatialAudioOffIcon,
   SpatialTracking as SpatialTrackingIcon,
@@ -13,7 +15,7 @@ import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import video from "../../assets/backgraund/background-video4.mp4";
-import VideoBackground from "../VideoBackground";
+import logo from "../logo.png";
 import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -34,16 +36,15 @@ const pages = [
     icon: <SpatialAudioOffIcon />,
   },
   { title: "VALIDATION", link: "/validation", icon: <SpatialTrackingIcon /> },
-  { title: "MISSING", link: "/missing", icon: <SpatialAudioIcon /> },
+  // { title: "MISSING", link: "/missing", icon: <SpatialAudioIcon /> },
 ];
 
 function HomePage() {
   const classes = useStyles();
-
+  const navigate = useNavigate();
   const theme = createTheme();
   const isXsScreen = useMediaQuery("(max-width:600px)");
-
-  const navigate = useNavigate();
+  const [checked, setChecked] = React.useState(true);
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,46 +57,51 @@ function HomePage() {
           height: "100vh",
         }}
       >
-        <VideoBackground src={video} />
         <Container>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} display="flex" justifyContent="center">
+            <Grow in={checked} style={{ transitionDelay: "120ms" }}>
+              <Box ml={13} mt={3}>
+                <img src={logo} alt="logo" style={{ width: "70%" }} />
+              </Box>
+            </Grow>
             {pages.map((page) => (
-              <Grid item key={page.title} xs={12} md={4}>
-                <Card
-                  sx={{
-                    bgcolor: "transparent",
-                    opacity: 3,
-                    "&:hover": {
-                      // backgroundColor: "#BDBDBD",
-                      backgroundColor: "#424242",
-                      opacity: [0.9, 0.8, 0.7],
-                    },
-                    cursor: "pointer",
-                  }}
-                >
-                  <CardActionArea
-                    component="a"
-                    onClick={() => navigate(`${page.title}`)}
+              <Grow in={true} style={{ transitionDelay: "320ms" }}>
+                <Grid item key={page.title} xs={12} md={4}>
+                  <Card
+                    sx={{
+                      bgcolor: "#071f2a",
+                      opacity: 3,
+                      "&:hover": {
+                        backgroundColor: "#424242",
+                        opacity: [0.9, 0.8, 0.7],
+                      },
+                      cursor: "pointer",
+                    }}
                   >
-                    <CardContent
-                      className={classes.card}
-                      sx={{ minHeight: "100px" }}
+                    <CardActionArea
+                      component="a"
+                      onClick={() => navigate(page.link, { replace: true })}
                     >
-                      {React.cloneElement(page.icon, {
-                        sx: { fontSize: 100, color: "white" },
-                      })}
-                      <Typography
-                        variant="h4"
-                        component="h2"
-                        align="center"
-                        color={"white"}
+                      <CardContent
+                        className={classes.card}
+                        sx={{ minHeight: "100px" }}
                       >
-                        {page.title}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
+                        {React.cloneElement(page.icon, {
+                          sx: { fontSize: 100, color: "white" },
+                        })}
+                        <Typography
+                          variant="h4"
+                          component="h2"
+                          align="center"
+                          color={"white"}
+                        >
+                          {page.title}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              </Grow>
             ))}
           </Grid>
         </Container>

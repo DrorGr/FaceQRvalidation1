@@ -71,30 +71,31 @@ function RegistratioPage() {
 
   const steps = [
     {
-      label: "Personal Data Form",
+      label: "Personal Data ",
       content: <MyForm onSubmit={handleSubmit} initialFormData={formData} />,
     },
     {
-      label: "Face Scanning",
+      label: "Face Capturing",
       content: (
         <FaceRecognition onLandmarksDetected={handleLandmarksDetected} />
       ),
     },
     {
-      label: "Cryptographic Data",
+      label: "QR",
       content: (
-        <>
-          {genQrData !== "" && (
-            <QRCodeWithDownload value={genQrData} fileName="example-qrcode" />
-          )}
-        </>
+        <QRCodeWithDownload value={genQrData} fileName="example-qrcode" />
       ),
     },
   ];
   return (
     <>
       <Typography
-        sx={{ m: 2, fontFamily: "Segoe UI", textAlign: "center" }}
+        sx={{
+          m: 2,
+          fontFamily: "Segoe UI",
+          textAlign: "center",
+          color: "#071f2a",
+        }}
         variant="h4"
       >
         REGISTRATION

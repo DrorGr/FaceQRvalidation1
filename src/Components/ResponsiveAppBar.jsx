@@ -19,7 +19,7 @@ const pages = [
   { title: "Home", link: "/" },
   { title: "Registration", link: "/registration" },
   { title: "Validation", link: "/validation" },
-  { title: "Missing", link: "/missing" },
+  // { title: "Missing", link: "/missing" },
 ];
 const settings = ["Profile", "Account", "Logout"];
 const LOGO = "Pangea";
@@ -47,7 +47,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="100vw" sx={{ backgroundColor: "#282c34" }}>
+      <Container maxWidth="100vw" sx={{ backgroundColor: "#285c7e" }}>
         <Toolbar
           disableGutters
           sx={{

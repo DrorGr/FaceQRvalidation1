@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import QRCode from "qrcode.react";
 import Button from "@mui/material/Button";
 import ShareButton from "../ShareButton";
 
 const QRCodeWithDownload = ({ value }) => {
-
   const handleDownload = () => {
     const canvas = document.querySelector("#qrcode");
 
@@ -71,29 +70,30 @@ const QRCodeWithDownload = ({ value }) => {
   };
 
   return (
-    <div style={{ textAlign: "-webkit-center" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
-          backgroundColor: "white",
-          padding: "3px",
-          width: "fit-content",
           display: "flex",
-          scale: "1.2",
-          marginTop: "10%",
+          flexDirection: "column",
+          justifyContent: "center",
+          backgroundColor: "white",
+          marginTop: "10px",
+          marginRight: "18px",
         }}
       >
-        <QRCode
-          id="qrcode"
-          value={value}
-          size={1024}
-          style={{ maxWidth: 256, maxHeight: 256 }}
-        />
+        <QRCode id="qrcode" value={value} style={{ width: 300, height: 300 }} />
       </div>
       <br />
       <br />
       <ShareButton />
       <br />
-      <Button onClick={handleDownload}>Download</Button>
     </div>
   );
 };
