@@ -11,31 +11,41 @@ import {
   SpatialTracking as SpatialTrackingIcon,
   SpatialAudio as SpatialAudioIcon,
 } from "@mui/icons-material";
+import HowToRegOutlinedIcon from "@mui/icons-material/HowToRegOutlined";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import video from "../../assets/backgraund/background-video4.mp4";
 import logo from "../logo.png";
 import { useNavigate } from "react-router-dom";
+
+import Group from "../../assets/Images/Group.svg";
+import Path from "../../assets/Images/Path.svg";
 
 const useStyles = makeStyles({
   card: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    minHeight: 200,
-    // backgroundColor: "#BDBDBD"
+    justifyContent: "space-around",
+    height: "80px",
+    width: "321px",
   },
 });
 
 const pages = [
   {
-    title: "REGISTRATION",
+    title: "Registration",
     link: "/registration",
-    icon: <SpatialAudioOffIcon />,
+    icon: Group,
+    cardColor: "#156183",
   },
-  { title: "VALIDATION", link: "/validation", icon: <SpatialTrackingIcon /> },
+  {
+    title: "Verification",
+    link: "/Verification",
+    icon: Path,
+    cardColor: "#319ba1",
+  },
   // { title: "MISSING", link: "/missing", icon: <SpatialAudioIcon /> },
 ];
 
@@ -54,46 +64,69 @@ function HomePage() {
           justifyContent: "center",
           alignItems: isXsScreen ? "flex-start" : "center",
           marginTop: isXsScreen ? "2vh" : undefined,
-          height: "100vh",
+          // height: "100vh",
         }}
       >
         <Container>
-          <Grid container spacing={2} display="flex" justifyContent="center">
+          <Grid
+            container
+            spacing={2}
+            gap={2}
+            display="flex"
+            justifyContent="center"
+          >
             <Grow in={checked} style={{ transitionDelay: "120ms" }}>
-              <Box ml={13} mt={3}>
-                <img src={logo} alt="logo" style={{ width: "70%" }} />
+              <Box
+                mt={6}
+                ml={2}
+                gap={1}
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <img src={logo} alt="logo" style={{ width: "40%" }} />
+                <Typography color="#285C7E" fontSize={25}>
+                  Certificate Issuing Application
+                </Typography>
               </Box>
             </Grow>
             {pages.map((page) => (
               <Grow in={true} style={{ transitionDelay: "320ms" }}>
-                <Grid item key={page.title} xs={12} md={4}>
+                <Grid
+                  item
+                  key={page.title}
+                  xs={12}
+                  md={4}
+                  display="flex"
+                  justifyContent="center"
+                >
                   <Card
                     sx={{
-                      bgcolor: "#071f2a",
+                      bgcolor: page.cardColor,
                       opacity: 3,
                       "&:hover": {
                         backgroundColor: "#424242",
                         opacity: [0.9, 0.8, 0.7],
                       },
                       cursor: "pointer",
+                      borderRadius: "17px",
                     }}
                   >
                     <CardActionArea
                       component="a"
                       onClick={() => navigate(page.link, { replace: true })}
                     >
-                      <CardContent
-                        className={classes.card}
-                        sx={{ minHeight: "100px" }}
-                      >
-                        {React.cloneElement(page.icon, {
-                          sx: { fontSize: 100, color: "white" },
-                        })}
+                      <CardContent className={classes.card}>
+                        <img src={page.icon} alt="icon" />
                         <Typography
-                          variant="h4"
-                          component="h2"
-                          align="center"
                           color={"white"}
+                          sx={{
+                            // fontWeight: "bold",
+                            fontSize: "2rem",
+                            textAlign: "start",
+                            width: "50%",
+                          }}
                         >
                           {page.title}
                         </Typography>

@@ -4,13 +4,15 @@ import { createTheme } from '@material-ui/core/styles';
 import { Button, Grid, IconButton } from '@material-ui/core';
 import { PhotoCamera, SwitchCamera } from '@mui/icons-material';
 import * as faceapi from 'face-api.js';
+import { useSnackbar } from 'notistack';
 
 const theme = createTheme();
 
-const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
+const FaceVerification = ({ photoDescriptor, next }) => {
   const [isCameraStarted, setIsCameraStarted] = useState(false);
   const [isFrontCamera, setIsFrontCamera] = useState(false);
   const [detected, setDetected] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const videoRef = React.useRef(null);
   const canvasRef = React.useRef(null);
@@ -28,20 +30,19 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
           advanced: [
             {
               torch: true,
-              focusMode: 'auto',
-              exposureMode: 'auto',
+              focusMode: 'continuous',
+              exposureMode: 'continuous',
               whiteBalanceMode: 'continuous',
-              colorTemperature: 6500,
+              colorTemperature: 6000,
               saturation: 100,
               brightness: 100,
               contrast: 100,
               sharpness: 100,
               iso: 100,
-              zoom: 10,
+              zoom: 1,
             },
           ],
         });
-
         setIsCameraStarted(true);
       } catch (error) {
         console.error(error);
@@ -67,7 +68,7 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
 
     return () => {
       if (isCameraStarted) {
-        // stopCamera();
+        stopCamera();
       }
     };
   }, [isFrontCamera]);
@@ -75,7 +76,6 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
   const stopCamera = () => {
     if (videoRef.current) {
       const stream = videoRef.current.srcObject;
-
       if (stream) {
         const tracks = stream.getTracks();
         tracks.forEach((track) => track.stop());
@@ -91,11 +91,8 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
 
   useEffect(() => {
     let intervalId;
-    let intervalId2;
     if (isCameraStarted) {
       const canvas = canvasRef.current;
-      canvasRef.current.width = 32;
-      canvasRef.current.height = 42;
       const context = canvas.getContext('2d');
 
       const detectFaces = async () => {
@@ -106,10 +103,6 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
         };
         faceapi.matchDimensions(canvas, displaySize);
 
-        // const detections = await faceapi
-        //   .detectSingleFace(video, new faceapi.SsdMobilenetv1Options())
-        //   .withFaceLandmarks();
-
         const detections = await faceapi
           .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
           .withFaceLandmarks()
@@ -117,35 +110,32 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
           .withFaceDescriptors();
 
         if (detections.length > 0) {
-          // onLandmarksDetected(detections.landmarks);
-          onLandmarksDetected(detections);
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          faceapi.draw.drawFaceLandmarks(canvas, detections[0].landmarks);
-          setIsCameraStarted(false);
-          stopCamera();
-          setDetected(true);
-          clearInterval(intervalId);
-          clearInterval(intervalId2);
+          const videoFaceDescriptor = detections[0].descriptor;
+          const photoFaceDescriptor = photoDescriptor;
+
+          const distance = faceapi.euclideanDistance(videoFaceDescriptor, photoFaceDescriptor);
+          if (distance < 0.5) {
+            // 0.6 is a threshold value, can be adjusted based on accuracy
+            setIsCameraStarted(false);
+            stopCamera();
+            setDetected(true);
+            clearInterval(intervalId);
+            next();
+
+            enqueueSnackbar('Person Validate Successful', {
+              variant: 'success',
+              autoHideDuration: 2000,
+            });
+          }
         }
       };
 
       intervalId = setInterval(() => {
-        canvasRef.current.getContext('2d').drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-        setformData((prevState) => ({
-          ...prevState,
-          image: canvasRef.current.toDataURL('image/jpeg'),
-        }));
-      }, 100);
-
-      intervalId2 = setInterval(() => {
         detectFaces();
-      }, 2000);
+      }, 1000);
     }
 
-    return () => {
-      clearInterval(intervalId);
-      clearInterval(intervalId2);
-    };
+    return () => clearInterval(intervalId);
   }, [isCameraStarted]);
 
   return (
@@ -171,24 +161,9 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
               autoPlay
               muted
               playsInline
-              width={120}
-              height={200}
-              style={{ position: 'absolute', top: 0, left: 0 }}
-            />
-            <canvas
-              ref={canvasRef}
-              width={120}
-              height={200}
-              style={{ position: 'absolute', top: 0, left: 0, visibility: 'hidden' }}
-            />
-            {/* <video
-              ref={videoRef}
-              autoPlay
-              muted
-              playsInline
               style={{
-                maxWidth: "100%",
-                position: "absolute",
+                maxWidth: '100%',
+                position: 'absolute',
                 top: 0,
                 left: 0,
                 zIndex: 1,
@@ -197,12 +172,12 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
             <canvas
               ref={canvasRef}
               style={{
-                position: "absolute",
+                position: 'absolute',
                 top: 0,
                 left: 0,
                 zIndex: 2,
               }}
-            /> */}
+            />
             {isCameraStarted && (
               <IconButton onClick={onSwitchCamera} style={{ position: 'absolute', top: 8, right: 8, zIndex: 3 }} color='primary'>
                 <SwitchCamera />
@@ -230,4 +205,4 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
   );
 };
 
-export default FaceRecognition;
+export default FaceVerification;

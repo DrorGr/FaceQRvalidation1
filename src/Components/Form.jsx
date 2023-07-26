@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Grid, TextField } from "@material-ui/core";
+import React, { useState, useEffect } from 'react';
+import { Grid, TextField } from '@material-ui/core';
 
-const MyForm = ({ onSubmit, initialFormData }) => {
-  const [formData, setFormData] = useState(initialFormData);
-
+const MyForm = ({ onSubmit, formData, setFormData }) => {
   useEffect(() => {
     onSubmit(formData);
   }, [formData, onSubmit]);
@@ -16,49 +14,46 @@ const MyForm = ({ onSubmit, initialFormData }) => {
   };
 
   return (
-    <form style={{ padding: "10px" }}>
-      <Grid container spacing={2} justifyContent="center">
+    <form style={{ padding: '10px' }}>
+      <Grid container spacing={2} justifyContent='center'>
         <Grid item xs={12} xl={3}>
           <TextField
-            name="name"
-            label="Name"
-            type="name"
-            // variant="outlined"
+            name='name'
+            label='Name'
+            type='name'
             value={formData.name}
             onChange={handleChange}
-            margin="normal"
+            margin='normal'
             fullWidth
             autoFocus
-            InputLabelProps={{ style: { color: "#071f2a" } }}
-            InputProps={{ style: { color: "#071f2a" } }}
+            InputLabelProps={{ style: { color: '#071f2a' } }}
+            InputProps={{ style: { color: '#071f2a' } }}
           />
         </Grid>
         <Grid item xs={12} xl={3}>
           <TextField
-            name="email"
-            label="Email"
-            type="email"
-            // variant="outlined"
+            name='email'
+            label='Email'
+            type='email'
             value={formData.email}
             onChange={handleChange}
-            margin="normal"
+            margin='normal'
             fullWidth
-            InputLabelProps={{ style: { color: "#071f2a" } }}
-            InputProps={{ style: { color: "#071f2a" } }}
+            InputLabelProps={{ style: { color: '#071f2a' } }}
+            InputProps={{ style: { color: '#071f2a' } }}
           />
         </Grid>
         <Grid item xs={12} xl={3}>
           <TextField
-            name="phone"
-            label="Phone"
-            type="tel"
-            // variant="outlined"
+            name='phone'
+            label='Phone'
+            type='tel'
             value={formData.phone}
             onChange={handleChange}
-            margin="normal"
+            margin='normal'
             fullWidth
-            InputLabelProps={{ style: { color: "#071f2a" } }}
-            InputProps={{ style: { color: "#071f2a" } }}
+            InputLabelProps={{ style: { color: '#071f2a' } }}
+            InputProps={{ style: { color: '#071f2a' } }}
           />
         </Grid>
       </Grid>
