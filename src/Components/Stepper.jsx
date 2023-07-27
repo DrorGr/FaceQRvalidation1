@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-export default function VerticalLinearStepper({ steps, isLandmark, reset, aStep, sendData }) {
+export default function VerticalLinearStepper({ steps, isLandmark, reset, aStep, sendData, options }) {
   const [activeStep, setActiveStep] = React.useState(0);
 
   React.useEffect(() => {
@@ -62,14 +62,14 @@ export default function VerticalLinearStepper({ steps, isLandmark, reset, aStep,
                         onClick={sendData}
                         sx={{ mt: 1, ml: -0.4, width: '45%', height: 35, backgroundColor: '#294f75' }}
                       >
-                        Approve
+                        {options ? options[1] : 'Approve'}
                       </Button>
                       <Button
                         variant='contained'
                         onClick={handleBack}
                         sx={{ mt: 1, ml: -0.4, width: '45%', height: 35, backgroundColor: '#319ba1' }}
                       >
-                        Update
+                        {options ? options[0] : 'Update'}
                       </Button>
                     </Box>
                   )}

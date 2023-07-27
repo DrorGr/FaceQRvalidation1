@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Grid, TextField } from '@material-ui/core';
 
 const MyForm = ({ onSubmit, formData, setFormData }) => {

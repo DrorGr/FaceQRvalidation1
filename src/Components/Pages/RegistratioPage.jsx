@@ -4,7 +4,6 @@ import FaceRecognition from '../Face/FaceRecognition';
 import MyForm from '../Form';
 import Typography from '@mui/material/Typography';
 import VerticalLinearStepper from '../Stepper';
-import QRCodeWithDownload from '../QR/QRCodeWithDownload';
 import Summery from '../SummeryDetails/Summery';
 import Logic from '../../Logic/Logic';
 import * as faceapi from 'face-api.js';
@@ -22,9 +21,9 @@ function RegistratioPage() {
     referenceNumber: Math.ceil(Math.random() * 99999999),
   });
 
-  const removeBase64Prefix = (base64) => {
-    return base64.substr(base64.indexOf(',') + 1);
-  };
+  // const removeBase64Prefix = (base64) => {
+  //   return base64.substr(base64.indexOf(',') + 1);
+  // };
 
   const DemoUrl = 'https://localhost:7194/Demo';
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createTheme } from '@material-ui/core/styles';
-import { Button, Grid, IconButton } from '@material-ui/core';
-import { PhotoCamera, SwitchCamera } from '@mui/icons-material';
+import { Grid, IconButton } from '@material-ui/core';
+import { SwitchCamera } from '@mui/icons-material';
 import * as faceapi from 'face-api.js';
 import { useSnackbar } from 'notistack';
 
@@ -71,7 +71,7 @@ const FaceVerification = ({ photoDescriptor, next }) => {
         stopCamera();
       }
     };
-  }, [isFrontCamera]);
+  }, [isCameraStarted, isFrontCamera]);
 
   const stopCamera = () => {
     if (videoRef.current) {
@@ -93,7 +93,7 @@ const FaceVerification = ({ photoDescriptor, next }) => {
     let intervalId;
     if (isCameraStarted) {
       const canvas = canvasRef.current;
-      const context = canvas.getContext('2d');
+      // const context = canvas.getContext('2d');
 
       const detectFaces = async () => {
         const video = videoRef.current;
@@ -136,6 +136,7 @@ const FaceVerification = ({ photoDescriptor, next }) => {
     }
 
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCameraStarted]);
 
   return (

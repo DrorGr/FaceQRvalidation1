@@ -2,8 +2,9 @@
   "name": "pangea-fv-pwa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://drorgr.github.io/FaceQRVerification1/#",
+  "homepage": "https://drorgr.github.io/FaceQRvalidation1/",
   "dependencies": {
+    "@blackbox-vision/use-torch-light": "^0.0.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",

@@ -5,7 +5,6 @@ import { Routes, HashRouter, Route } from 'react-router-dom';
 import HomePage from './Components/Pages/HomePage';
 import VerificationPage from './Components/Pages/Verification';
 import RegistrationPage from './Components/Pages/RegistratioPage';
-import MissingPage from './Components/Pages/MissingPage';
 
 import { SnackbarProvider } from 'notistack';
 

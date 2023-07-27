@@ -11,6 +11,7 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
   const [isCameraStarted, setIsCameraStarted] = useState(false);
   const [isFrontCamera, setIsFrontCamera] = useState(false);
   const [detected, setDetected] = useState(false);
+  const [flash, setFlash] = useState(true);
 
   const videoRef = React.useRef(null);
   const canvasRef = React.useRef(null);
@@ -24,24 +25,6 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
           },
         });
         videoRef.current.srcObject = stream;
-        stream.getVideoTracks()[0].applyConstraints({
-          advanced: [
-            {
-              torch: true,
-              focusMode: 'auto',
-              exposureMode: 'auto',
-              whiteBalanceMode: 'continuous',
-              colorTemperature: 6500,
-              saturation: 100,
-              brightness: 100,
-              contrast: 100,
-              sharpness: 100,
-              iso: 100,
-              zoom: 10,
-            },
-          ],
-        });
-
         setIsCameraStarted(true);
       } catch (error) {
         console.error(error);
@@ -67,7 +50,7 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
 
     return () => {
       if (isCameraStarted) {
-        // stopCamera();
+        stopCamera();
       }
     };
   }, [isFrontCamera]);
@@ -75,7 +58,6 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
   const stopCamera = () => {
     if (videoRef.current) {
       const stream = videoRef.current.srcObject;
-
       if (stream) {
         const tracks = stream.getTracks();
         tracks.forEach((track) => track.stop());
@@ -94,8 +76,6 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
     let intervalId2;
     if (isCameraStarted) {
       const canvas = canvasRef.current;
-      canvasRef.current.width = 32;
-      canvasRef.current.height = 42;
       const context = canvas.getContext('2d');
 
       const detectFaces = async () => {
@@ -123,12 +103,11 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
           faceapi.draw.drawFaceLandmarks(canvas, detections[0].landmarks);
           setIsCameraStarted(false);
           stopCamera();
+
           setDetected(true);
           clearInterval(intervalId);
-          clearInterval(intervalId2);
         }
       };
-
       intervalId = setInterval(() => {
         canvasRef.current.getContext('2d').drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
         setformData((prevState) => ({
@@ -171,14 +150,14 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
               autoPlay
               muted
               playsInline
-              width={120}
-              height={200}
+              width='100%'
+              height='100%'
               style={{ position: 'absolute', top: 0, left: 0 }}
             />
             <canvas
               ref={canvasRef}
-              width={120}
-              height={200}
+              width='100%'
+              height='100%'
               style={{ position: 'absolute', top: 0, left: 0, visibility: 'hidden' }}
             />
             {/* <video
@@ -204,9 +183,19 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
               }}
             /> */}
             {isCameraStarted && (
-              <IconButton onClick={onSwitchCamera} style={{ position: 'absolute', top: 8, right: 8, zIndex: 3 }} color='primary'>
-                <SwitchCamera />
-              </IconButton>
+              <>
+                <IconButton
+                  onClick={onSwitchCamera}
+                  style={{ position: 'absolute', top: 8, right: 8, zIndex: 3 }}
+                  color='primary'
+                >
+                  <SwitchCamera />
+                </IconButton>
+
+                {/* <IconButton onClick={() => setFlash(true)} style={{ position: 'absolute', top: 48, right: 8, zIndex: 3 }}>
+                  <SwitchCamera />
+                </IconButton> */}
+              </>
             )}
           </div>
         </Grid>

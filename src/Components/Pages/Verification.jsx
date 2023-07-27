@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
-import FaceRecognition from '../Face/FaceRecognition';
-import MyForm from '../Form';
 import Typography from '@mui/material/Typography';
 import VerticalLinearStepper from '../Stepper';
-import QRCodeWithDownload from '../QR/QRCodeWithDownload';
 import Logic from '../../Logic/Logic';
 import QrReader from '../QR/QrReader';
 import FaceVerification from '../Face/FaceVerification';
+import { useNavigate } from 'react-router';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import * as faceapi from 'face-api.js';
 import { useSnackbar } from 'notistack';
@@ -17,6 +15,7 @@ function VerificationPage() {
   const [activeStep, setActiveStep] = useState(0);
   const myLogic = new Logic();
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadModels = async () => {
@@ -89,15 +88,17 @@ function VerificationPage() {
   ];
   return (
     <>
-      <Typography sx={{ m: 2, fontFamily: 'Segoe UI', textAlign: 'center' }} variant='h4'>
-        Verification
-      </Typography>
-      <Container sx={{ mt: 5 }}>
+      <Container sx={{ mt: 2 }}>
+        <Typography m={2} sx={{ fontFamily: 'Segoe UI', textAlign: 'center', color: 'black' }} variant='h4'>
+          Verification
+        </Typography>
         <VerticalLinearStepper
           steps={steps}
           // isLandmark={isLandmark}
           reset={handleReset}
           aStep={activeStep}
+          sendData={() => navigate('/', { replace: true })}
+          options={['Verify again', 'Back to home']}
         />
       </Container>
     </>
