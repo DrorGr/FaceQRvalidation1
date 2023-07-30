@@ -26,9 +26,10 @@ function RegistratioPage() {
   // };
 
   const DemoUrl = 'https://localhost:7194/Demo';
+  const DemoUrl2 = 'http://192.168.40.24:12006/Demo';
 
   const sendData = async () => {
-    await fetch(DemoUrl, {
+    await fetch(DemoUrl2, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
