@@ -116,7 +116,7 @@ const FaceVerification = ({ photoDescriptor, next }) => {
 
       intervalId = setInterval(() => {
         detectFaces();
-      }, 1000);
+      }, 100);
     }
 
     return () => clearInterval(intervalId);
