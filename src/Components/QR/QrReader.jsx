@@ -2,12 +2,19 @@ import React, { useState, useRef } from 'react';
 import { QrScanner } from '@yudiel/react-qr-scanner';
 import Button from '@mui/material/Button';
 import { useMediaQuery } from '@mui/material';
+import { useEffect } from 'react';
 
 function QrReader({ qrData, next }) {
   const [scanning, setScanning] = useState(false);
   const [cameraOpen, setCameraOpen] = useState(true);
   const scannerRef = useRef();
   const isSmallScreen = useMediaQuery('(max-width:600px)'); // Change 600px to your desired breakpoint
+
+  useEffect(() => {
+    if (scannerRef.current) {
+      console.log(scannerRef.current);
+    }
+  }, [scannerRef.current]);
 
   const handleStartScan = () => {
     setScanning(true);

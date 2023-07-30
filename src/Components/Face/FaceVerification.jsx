@@ -27,18 +27,6 @@ const FaceVerification = ({ photoDescriptor, next }) => {
         });
         videoRef.current.srcObject = stream;
 
-        stream
-          .getVideoTracks()[0]
-          .getCapabilities()
-          .then((cap) => {
-            console.log(cap);
-            if (cap.torch) {
-              stream.getVideoTracks()[0].applyConstraints({
-                advanced: [{ torch: true }],
-              });
-            }
-          });
-
         setIsCameraStarted(true);
       } catch (error) {
         console.error(error);
