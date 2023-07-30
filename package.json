@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://drorgr.github.io/FaceQRvalidation1/",
   "dependencies": {
+    "@blackbox-vision/react-qr-reader": "^5.0.0",
     "@blackbox-vision/use-torch-light": "^0.0.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

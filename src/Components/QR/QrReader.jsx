@@ -1,13 +1,13 @@
-import React, { useState, useRef } from "react";
-import { QrScanner } from "@yudiel/react-qr-scanner";
-import Button from "@mui/material/Button";
-import { useMediaQuery } from "@mui/material";
+import React, { useState, useRef } from 'react';
+import { QrScanner } from '@yudiel/react-qr-scanner';
+import Button from '@mui/material/Button';
+import { useMediaQuery } from '@mui/material';
 
 function QrReader({ qrData, next }) {
   const [scanning, setScanning] = useState(false);
   const [cameraOpen, setCameraOpen] = useState(true);
   const scannerRef = useRef();
-  const isSmallScreen = useMediaQuery("(max-width:600px)"); // Change 600px to your desired breakpoint
+  const isSmallScreen = useMediaQuery('(max-width:600px)'); // Change 600px to your desired breakpoint
 
   const handleStartScan = () => {
     setScanning(true);
@@ -37,20 +37,15 @@ function QrReader({ qrData, next }) {
   };
 
   return (
-    <div style={{textAlign:"center"}}>
+    <div style={{ textAlign: 'center' }}>
       <div
         style={{
-          width: isSmallScreen ? "100%" : "50%",
-          display: "inline-block"
+          width: isSmallScreen ? '100%' : '50%',
+          display: 'inline-block',
         }}
       >
         {cameraOpen && (
-          <QrScanner
-            ref={scannerRef}
-            onDecode={handleDecode}
-            onError={handleError}
-            style={{ width: "100%", height: "100%" }}
-          />
+          <QrScanner ref={scannerRef} onDecode={handleDecode} onError={handleError} style={{ width: '100%', height: '100%' }} />
         )}
         {!cameraOpen && <Button onClick={handleOpenCamera}>Open Camera</Button>}
         {/* {cameraOpen && (

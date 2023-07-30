@@ -26,23 +26,19 @@ const FaceVerification = ({ photoDescriptor, next }) => {
           },
         });
         videoRef.current.srcObject = stream;
-        stream.getVideoTracks()[0].applyConstraints({
-          advanced: [
-            {
-              torch: true,
-              focusMode: 'continuous',
-              exposureMode: 'continuous',
-              whiteBalanceMode: 'continuous',
-              colorTemperature: 6000,
-              saturation: 100,
-              brightness: 100,
-              contrast: 100,
-              sharpness: 100,
-              iso: 100,
-              zoom: 1,
-            },
-          ],
-        });
+
+        stream
+          .getVideoTracks()[0]
+          .getCapabilities()
+          .then((cap) => {
+            console.log(cap);
+            if (cap.torch) {
+              stream.getVideoTracks()[0].applyConstraints({
+                advanced: [{ torch: true }],
+              });
+            }
+          });
+
         setIsCameraStarted(true);
       } catch (error) {
         console.error(error);
