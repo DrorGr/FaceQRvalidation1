@@ -98,7 +98,8 @@ const FaceVerification = ({ photoDescriptor, next }) => {
           const photoFaceDescriptor = photoDescriptor;
 
           const distance = faceapi.euclideanDistance(videoFaceDescriptor, photoFaceDescriptor);
-          if (distance < 0.5) {
+          console.log(distance);
+          if (distance < 0.62) {
             // 0.6 is a threshold value, can be adjusted based on accuracy
             setIsCameraStarted(false);
             stopCamera();
