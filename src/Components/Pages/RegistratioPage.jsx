@@ -129,7 +129,7 @@ function RegistratioPage() {
         }}
         variant='h4'
       >
-        REGISTRATION
+        Registration
       </Typography>
       <Container sx={{ mt: 5 }}>
         <VerticalLinearStepper

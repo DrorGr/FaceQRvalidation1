@@ -98,12 +98,11 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
 
         if (detections.length > 0) {
           // onLandmarksDetected(detections.landmarks);
+          stopCamera();
           onLandmarksDetected(detections);
           context.clearRect(0, 0, canvas.width, canvas.height);
           faceapi.draw.drawFaceLandmarks(canvas, detections[0].landmarks);
           setIsCameraStarted(false);
-          stopCamera();
-
           setDetected(true);
           clearInterval(intervalId);
         }

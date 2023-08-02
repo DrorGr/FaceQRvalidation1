@@ -10,12 +10,6 @@ function QrReader({ qrData, next }) {
   const scannerRef = useRef();
   const isSmallScreen = useMediaQuery('(max-width:600px)'); // Change 600px to your desired breakpoint
 
-  useEffect(() => {
-    if (scannerRef.current) {
-      console.log(scannerRef.current);
-    }
-  }, [scannerRef.current]);
-
   const handleStartScan = () => {
     setScanning(true);
   };
@@ -52,7 +46,12 @@ function QrReader({ qrData, next }) {
         }}
       >
         {cameraOpen && (
-          <QrScanner ref={scannerRef} onDecode={handleDecode} onError={handleError} style={{ width: '100%', height: '100%' }} />
+          <QrScanner
+            ref={scannerRef}
+            onDecode={handleDecode}
+            onError={handleError}
+            style={{ height: window.innerHeight * 0.1 }}
+          />
         )}
         {!cameraOpen && <Button onClick={handleOpenCamera}>Open Camera</Button>}
         {/* {cameraOpen && (

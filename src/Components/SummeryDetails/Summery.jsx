@@ -62,11 +62,11 @@ function Summery({ formData }) {
 
       <Grid>
         <DataField>
-          <DataTitle>red no</DataTitle>
+          <DataTitle>Ref No.:</DataTitle>
           <DataValue>{formData.referenceNumber}</DataValue>
         </DataField>
         <DataField>
-          <DataTitle>Date</DataTitle>
+          <DataTitle>Date:</DataTitle>
           <DataValue>{new Date().toISOString().slice(0, 10)}</DataValue>
         </DataField>
         <DataField>
@@ -74,11 +74,11 @@ function Summery({ formData }) {
           <DataValue>{formData.name}</DataValue>
         </DataField>
         <DataField>
-          <DataTitle>Email</DataTitle>
+          <DataTitle>Email:</DataTitle>
           <DataValue>{formData.email}</DataValue>
         </DataField>
         <DataField>
-          <DataTitle>Phone No.</DataTitle>
+          <DataTitle>Phone No.:</DataTitle>
           <DataValue>{`${formData.phone.slice(0, 3)}-${formData.phone.slice(3)}`}</DataValue>
         </DataField>
       </Grid>
