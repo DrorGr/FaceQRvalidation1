@@ -61,7 +61,7 @@ function HomePage() {
       >
         <Container>
           <Grid container spacing={2} gap={2} display='flex' justifyContent='center'>
-            <Grow in={checked} style={{ transitionDelay: '120ms' }}>
+            <Grow in={checked} style={{ transformOrigin: '0 0 0 0' }} {...(checked ? { timeout: 1000 } : {})}>
               <Box mt={6} ml={2} gap={1} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
                 <img src={logo} alt='logo' style={{ width: '40%' }} />
                 <Typography color='#285C7E' fontSize={25}>
@@ -70,7 +70,7 @@ function HomePage() {
               </Box>
             </Grow>
             {pages.map((page) => (
-              <Grow in={true} style={{ transitionDelay: '320ms' }}>
+              <Grow in={true} style={{ transformOrigin: '0 0 0 0' }} {...(checked ? { timeout: 2000 } : {})}>
                 <Grid item key={page.title} xs={12} md={4} display='flex' justifyContent='center'>
                   <Card
                     sx={{

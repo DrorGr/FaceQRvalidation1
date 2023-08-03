@@ -12,14 +12,14 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
 const pages = [
-  { title: 'Home', link: '/' },
-  { title: 'Registration', link: '/registration' },
+  { title: 'Home', link: '/Home' },
+  { title: 'Registration', link: '/Registration' },
   { title: 'Verification', link: '/Verification' },
   // { title: "Missing", link: "/missing" },
 ];
 const settings = ['Profile', 'Account', 'Logout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ location }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -39,6 +39,7 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  console.log(location);
 
   return (
     <AppBar position='static'>
@@ -85,7 +86,12 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.title} onClick={() => handleCloseNavMenu(page)}>
+                <MenuItem
+                  key={page.title}
+                  onClick={() => handleCloseNavMenu(page)}
+                  // disabled={location.includes(page.title)}
+                  sx={{ backgroundColor: location.includes(page.title) ? '#E6E6E6' : '#fff' }}
+                >
                   <Typography textAlign='center'>{page.title}</Typography>
                 </MenuItem>
               ))}

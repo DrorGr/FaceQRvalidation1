@@ -10,7 +10,6 @@ import { SnackbarProvider } from 'notistack';
 
 function App() {
   const location = useLocation();
-  console.log(location.pathname);
   const pathnames = ['/HOME', '/VERIFICATION', '/REGISTRATION'];
   return (
     <>
@@ -23,7 +22,7 @@ function App() {
       >
         {pathnames.includes(location.pathname.toUpperCase()) && (
           <>
-            <ResponsiveAppBar />
+            <ResponsiveAppBar location={location.pathname} />
             <p style={{ color: '#000', position: 'absolute', bottom: -7, left: 18 }}>V.1.0</p>
           </>
         )}
