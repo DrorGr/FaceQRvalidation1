@@ -86,14 +86,13 @@ function HomePage() {
                   >
                     <CardActionArea component='a' onClick={() => navigate(page.link, { replace: true })}>
                       <CardContent className={classes.card}>
-                        <img src={page.icon} alt='icon' />
+                        <img src={page.icon} alt='icon' style={{ marginLeft: '10px' }} />
                         <Typography
                           color={'white'}
                           sx={{
-                            // fontWeight: "bold",
                             fontSize: '2rem',
                             textAlign: 'start',
-                            width: '50%',
+                            mr: 2,
                           }}
                         >
                           {page.title}

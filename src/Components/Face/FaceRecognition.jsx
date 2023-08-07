@@ -117,7 +117,7 @@ const FaceRecognition = ({ onLandmarksDetected, setformData }) => {
 
       intervalId2 = setInterval(() => {
         detectFaces();
-      }, 2000);
+      }, 3000);
     }
 
     return () => {
