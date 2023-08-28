@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import FaceRecognition from '../Face/FaceRecognition';
 import MyForm from '../Form';
 import Typography from '@mui/material/Typography';
 import VerticalLinearStepper from '../Stepper';
 import Summery from '../SummeryDetails/Summery';
-import Logic from '../../Logic/Logic';
 import * as faceapi from 'face-api.js';
-import { useEffect } from 'react';
 
-function RegistratioPage() {
-  const [genQrData, setGenQrData] = useState('');
+function RegistrationPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [landmarks, setLandmarks] = useState([0]);
   const [formData, setformData] = React.useState({
@@ -21,12 +18,8 @@ function RegistratioPage() {
     referenceNumber: Math.ceil(Math.random() * 99999999),
   });
 
-  // const removeBase64Prefix = (base64) => {
-  //   return base64.substr(base64.indexOf(',') + 1);
-  // };
-
-  const DemoUrl = 'https://localhost:7194/Demo';
-  const DemoUrl2 = 'http://192.168.40.24:12006/Demo';
+  // const DemoUrl = 'https://3aaa-81-218-77-178.ngrok-free.app/Demo';
+  const DemoUrl2 = 'http://localhost:7194/Demo';
 
   const sendData = async () => {
     await fetch(DemoUrl2, {
@@ -43,8 +36,6 @@ function RegistratioPage() {
         referenceNumber: `${formData.referenceNumber}`,
       }),
     });
-    // const data = await response.json();
-    // console.log(data);
   };
 
   useEffect(() => {
@@ -67,35 +58,14 @@ function RegistratioPage() {
     setformData(formData);
   };
 
-  const myLogic = new Logic();
   const handleLandmarksDetected = (detectedLandmarks) => {
-    if (detectedLandmarks.length > 0) {
-      compressData(detectedLandmarks);
-      setLandmarks(detectedLandmarks[0].descriptor);
-      setActiveStep(2);
-    }
-  };
-
-  const compressData = (detectedLandmarks) => {
-    setGenQrData(
-      myLogic.zip({
-        company: 'PANGEA',
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        photoDescriptor: detectedLandmarks[0].descriptor,
-      })
-    );
+    setLandmarks(detectedLandmarks[0].descriptor);
+    setActiveStep(2);
   };
 
   const handleReset = () => {
-    console.log('reset');
-    setformData({
-      name: '',
-      email: '',
-      phone: '',
-    });
     setActiveStep(0);
+    setLandmarks([0]);
   };
 
   const steps = [
@@ -105,14 +75,8 @@ function RegistratioPage() {
     },
     {
       label: 'Face Capturing',
-      content: <FaceRecognition onLandmarksDetected={handleLandmarksDetected} setformData={setformData} />,
+      content: <FaceRecognition onLandmarksDetected={handleLandmarksDetected} setFormData={setformData} formData={formData} />,
     },
-    // {
-    //   label: "QR",
-    //   content: (
-    //     <QRCodeWithDownload value={genQrData} fileName="example-qrcode" />
-    //   ),
-    // },
     {
       label: 'Summery Details',
       content: <Summery formData={formData} />,
@@ -131,17 +95,11 @@ function RegistratioPage() {
       >
         Registration
       </Typography>
-      <Container sx={{ mt: 5 }}>
-        <VerticalLinearStepper
-          steps={steps}
-          // isLandmark={isLandmark}
-          reset={handleReset}
-          aStep={activeStep}
-          sendData={sendData}
-        />
+      <Container sx={{ mt: 2 }}>
+        <VerticalLinearStepper steps={steps} reset={handleReset} aStep={activeStep} sendData={sendData} />
       </Container>
     </>
   );
 }
 
-export default RegistratioPage;
+export default RegistrationPage;

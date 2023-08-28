@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Tooltip from '@mui/material/Tooltip';
+import { Avatar } from '@material-ui/core';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,9 +15,15 @@ const pages = [
   { title: 'Home', link: '/Home' },
   { title: 'Registration', link: '/Registration' },
   { title: 'Verification', link: '/Verification' },
-  // { title: "Missing", link: "/missing" },
 ];
-const settings = ['Profile', 'Account', 'Logout'];
+const settings = [
+  {
+    title: 'Settings',
+  },
+  {
+    title: 'Logout',
+  },
+];
 
 function ResponsiveAppBar({ location }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -39,7 +45,6 @@ function ResponsiveAppBar({ location }) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  console.log(location);
 
   return (
     <AppBar position='static'>
@@ -53,10 +58,12 @@ function ResponsiveAppBar({ location }) {
           disableGutters
           sx={{
             zIndex: 1,
+            display: 'flex',
             alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size='large'
               aria-label='account of current user'
@@ -65,7 +72,7 @@ function ResponsiveAppBar({ location }) {
               onClick={handleOpenNavMenu}
               color='inherit'
             >
-              <MenuIcon />
+              <MenuIcon fontSize='large' />
             </IconButton>
             <Menu
               id='menu-appbar'
@@ -89,7 +96,6 @@ function ResponsiveAppBar({ location }) {
                 <MenuItem
                   key={page.title}
                   onClick={() => handleCloseNavMenu(page)}
-                  // disabled={location.includes(page.title)}
                   sx={{ backgroundColor: location.includes(page.title) ? '#E6E6E6' : '#fff' }}
                 >
                   <Typography textAlign='center'>{page.title}</Typography>
@@ -97,17 +103,22 @@ function ResponsiveAppBar({ location }) {
               ))}
             </Menu>
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}></IconButton>
-            </Tooltip>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton>
+              <Avatar
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleOpenUserMenu}
+              >
+                B
+              </Avatar>
+            </IconButton>
             <Menu
-              sx={{ mt: '45px' }}
               id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'right',
               }}
               keepMounted
@@ -117,10 +128,17 @@ function ResponsiveAppBar({ location }) {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+                <MenuItem
+                  key={setting.title}
+                  onClick={() => navigate('/Login', { replace: true })}
+                  sx={{ backgroundColor: location.includes(setting.title) ? '#E6E6E6' : '#fff' }}
+                >
+                  <Typography textAlign='center'>{setting.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>

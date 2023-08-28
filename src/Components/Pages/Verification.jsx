@@ -94,10 +94,9 @@ function VerificationPage() {
         </Typography>
         <VerticalLinearStepper
           steps={steps}
-          // isLandmark={isLandmark}
           reset={handleReset}
           aStep={activeStep}
-          sendData={() => navigate('/', { replace: true })}
+          sendData={() => navigate('/Home', { replace: true })}
           options={['Verify again', 'Back to home']}
         />
       </Container>

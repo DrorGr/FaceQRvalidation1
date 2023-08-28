@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -8,10 +8,10 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-export default function VerticalLinearStepper({ steps, isLandmark, reset, aStep, sendData, options }) {
-  const [activeStep, setActiveStep] = React.useState(0);
+export default function VerticalLinearStepper({ steps, reset, aStep, sendData, options }) {
+  const [activeStep, setActiveStep] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setActiveStep(aStep);
   }, [aStep]);
 
@@ -20,17 +20,17 @@ export default function VerticalLinearStepper({ steps, isLandmark, reset, aStep,
   };
 
   const handleBack = () => {
-    setActiveStep(0);
+    reset();
   };
 
   const handleReset = () => {
     reset();
-    setActiveStep(0);
   };
+
   return (
     <Box
       sx={{
-        height: '75vh',
+        height: '60vh',
         boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
         p: 2,
         borderRadius: 5,
@@ -42,7 +42,7 @@ export default function VerticalLinearStepper({ steps, isLandmark, reset, aStep,
             <StepLabel>
               <span style={{ color: '#071f2a' }}>{step.label}</span>
             </StepLabel>
-            <StepContent sx={{ pl: 0, ml: 1, mt: 1 }}>
+            <StepContent sx={{ mt: 1 }}>
               {step.content}
               {step.label !== 'Face Scanning' && step.label !== 'QR Scanning' && (
                 <Box display='flex' sx={{ mb: 2 }}>

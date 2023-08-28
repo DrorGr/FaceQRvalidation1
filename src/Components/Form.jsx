@@ -14,9 +14,9 @@ const MyForm = ({ onSubmit, formData, setFormData }) => {
   };
 
   return (
-    <form style={{ padding: '10px' }}>
-      <Grid container spacing={2} justifyContent='center'>
-        <Grid item xs={12} xl={3}>
+    <form>
+      <Grid container justifyContent='center'>
+        <Grid item xs={12}>
           <TextField
             name='name'
             label='Name'
@@ -30,7 +30,7 @@ const MyForm = ({ onSubmit, formData, setFormData }) => {
             InputProps={{ style: { color: '#071f2a' } }}
           />
         </Grid>
-        <Grid item xs={12} xl={3}>
+        <Grid item xs={12}>
           <TextField
             name='email'
             label='Email'
@@ -43,7 +43,7 @@ const MyForm = ({ onSubmit, formData, setFormData }) => {
             InputProps={{ style: { color: '#071f2a' } }}
           />
         </Grid>
-        <Grid item xs={12} xl={3}>
+        <Grid item xs={12}>
           <TextField
             name='phone'
             label='Phone'

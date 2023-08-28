@@ -5,7 +5,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './Components/Pages/HomePage';
 import LoginPage from './Components/Pages/LoginPage';
 import VerificationPage from './Components/Pages/Verification';
-import RegistrationPage from './Components/Pages/RegistratioPage';
+import RegistrationPage from './Components/Pages/RegistrationPage';
 import { SnackbarProvider } from 'notistack';
 
 function App() {
@@ -31,7 +31,6 @@ function App() {
           <Route exact path='/Home' element={<HomePage />} />
           <Route exact path='/Verification' element={<VerificationPage />} />
           <Route path='/Registration' element={<RegistrationPage />} />
-          {/* <Route exact path='/Login' element={<LoginPage />} /> */}
         </Routes>
       </SnackbarProvider>
     </>

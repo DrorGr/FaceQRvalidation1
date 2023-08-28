@@ -22,6 +22,7 @@ const useStyles = makeStyles({
     justifyContent: 'space-around',
     height: '80px',
     width: '321px',
+    margin: '10px',
   },
 });
 
@@ -54,7 +55,7 @@ function HomePage() {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: isXsScreen ? 'flex-start' : 'center',
+          alignItems: 'center',
           marginTop: isXsScreen ? '2vh' : undefined,
           // height: "100vh",
         }}

@@ -22,23 +22,21 @@ const DataField = styled('div')(({ theme }) => ({
   },
 }));
 
-const DataTitle = styled('div')(({ theme }) => ({
+const DataTitle = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
-  //   fontSize: "1rem",
   color: '#071f2a',
   fontWeight: 'bold',
   width: '40%',
 }));
 
-const DataValue = styled('div')(({ theme }) => ({
+const DataValue = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
-  //   fontSize: "1rem",
   color: '#071f2a',
   textAlign: 'start',
   width: '60%',
@@ -46,13 +44,11 @@ const DataValue = styled('div')(({ theme }) => ({
 
 function Summery({ formData }) {
   return (
-    <Box display='flex' flexDirection='row' mt={2} mb={2}>
+    <Box display='flex' flexDirection='row' mt={2} mb={2} ml={-3}>
       <Box
         component='img'
         src={formData.image}
-        alt='asdasd'
-        // width="120px"
-        // height="170px"
+        alt='face'
         sx={{
           height: 150,
           width: 120,
@@ -62,7 +58,7 @@ function Summery({ formData }) {
 
       <Grid>
         <DataField>
-          <DataTitle>Ref No.:</DataTitle>
+          <DataTitle>Ref No:</DataTitle>
           <DataValue>{formData.referenceNumber}</DataValue>
         </DataField>
         <DataField>
@@ -78,7 +74,7 @@ function Summery({ formData }) {
           <DataValue>{formData.email}</DataValue>
         </DataField>
         <DataField>
-          <DataTitle>Phone No.:</DataTitle>
+          <DataTitle>Phone No:</DataTitle>
           <DataValue>{`${formData.phone.slice(0, 3)}-${formData.phone.slice(3)}`}</DataValue>
         </DataField>
       </Grid>

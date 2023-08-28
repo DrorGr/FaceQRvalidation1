@@ -87,7 +87,6 @@ function LoginPage() {
             src={logo}
             sx={{
               height: '60%',
-              // width: 170,
             }}
           />
           Certificate Issuing Application
@@ -186,7 +185,6 @@ function LoginPage() {
           </FormControl>
           <Box display='flex' flexDirection='column' width='100%' gap={2} justifyContent='center' alignItems='center'>
             <Button
-              // disabled={!formData.password || !formData.username}
               onClick={handleSubmit}
               sx={{
                 width: '60vw',
@@ -197,6 +195,18 @@ function LoginPage() {
               variant='contained'
             >
               Log in
+            </Button>
+            <Button
+              onClick={() => {
+                setFormData({
+                  ...formData,
+                  username: 'Bank',
+                  password: 'Bank',
+                });
+                handleSubmit();
+              }}
+            >
+              Forgot Password
             </Button>
             <Typography
               sx={{

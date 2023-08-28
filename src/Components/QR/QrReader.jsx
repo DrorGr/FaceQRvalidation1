@@ -2,21 +2,11 @@ import React, { useState, useRef } from 'react';
 import { QrScanner } from '@yudiel/react-qr-scanner';
 import Button from '@mui/material/Button';
 import { useMediaQuery } from '@mui/material';
-import { useEffect } from 'react';
 
 function QrReader({ qrData, next }) {
-  const [scanning, setScanning] = useState(false);
   const [cameraOpen, setCameraOpen] = useState(true);
   const scannerRef = useRef();
   const isSmallScreen = useMediaQuery('(max-width:600px)'); // Change 600px to your desired breakpoint
-
-  const handleStartScan = () => {
-    setScanning(true);
-  };
-
-  const handleStopScan = () => {
-    setScanning(false);
-  };
 
   const handleOpenCamera = () => {
     setCameraOpen(true);
@@ -27,9 +17,7 @@ function QrReader({ qrData, next }) {
   };
 
   const handleDecode = (result) => {
-    console.log(result);
     qrData(result);
-    // next();
     handleCloseCamera();
   };
 
@@ -53,14 +41,11 @@ function QrReader({ qrData, next }) {
             style={{ height: window.innerHeight * 0.1 }}
           />
         )}
-        {!cameraOpen && <Button onClick={handleOpenCamera}>Open Camera</Button>}
-        {/* {cameraOpen && (
-          <div>
-            {!scanning && <Button onClick={handleStartScan}>Start Scan</Button>}
-            {scanning && <Button onClick={handleStopScan}>Stop Scan</Button>}
-            <Button onClick={handleCloseCamera}>Close Camera</Button>
-          </div>
-        )} */}
+        {!cameraOpen && (
+          <Button variant='outlined' onClick={handleOpenCamera}>
+            Scan again
+          </Button>
+        )}
       </div>
     </div>
   );
