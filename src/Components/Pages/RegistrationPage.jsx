@@ -19,7 +19,7 @@ function RegistrationPage() {
   });
 
   // const DemoUrl = 'https://3aaa-81-218-77-178.ngrok-free.app/Demo';
-  const DemoUrl2 = 'http://localhost:7194/Demo';
+  const DemoUrl2 = 'https://localhost:7194/Demo';
 
   const sendData = async () => {
     await fetch(DemoUrl2, {
