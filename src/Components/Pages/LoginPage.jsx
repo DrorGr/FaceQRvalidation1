@@ -14,7 +14,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LockIcon from '@mui/icons-material/Lock';
-import logo from '../logo.png';
+import logo from '../logo.jpg';
 import { userList } from '../../assets/userList/userList';
 import { useNavigate } from 'react-router-dom';
 

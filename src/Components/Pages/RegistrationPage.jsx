@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, version } from 'react';
 import { Container } from '@mui/material';
 import FaceRecognition from '../Face/FaceRecognition';
 import MyForm from '../Form';
@@ -6,6 +6,12 @@ import Typography from '@mui/material/Typography';
 import VerticalLinearStepper from '../Stepper';
 import Summery from '../SummeryDetails/Summery';
 import * as faceapi from 'face-api.js';
+import emailjs from '@emailjs/browser';
+import QRCodeWithDownload from '../QR/QRCodeWithDownload';
+import QRCode from 'qrcode'
+import { toPng } from 'html-to-image';
+
+
 
 function RegistrationPage() {
   const [activeStep, setActiveStep] = useState(0);
@@ -18,24 +24,36 @@ function RegistrationPage() {
     referenceNumber: Math.ceil(Math.random() * 99999999),
   });
 
-  // const DemoUrl = 'https://3aaa-81-218-77-178.ngrok-free.app/Demo';
-  const DemoUrl2 = 'https://b4b7-81-218-77-178.ngrok-free.app/Demo';
+  const sendData = (e) => {
+    e.preventDefault();
 
-  const sendData = async () => {
-    await fetch(DemoUrl2, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        phoneNumber: formData.phone,
-        faceDescriptor: Array.from(landmarks),
-        faceImage: formData.image.substr(formData.image.indexOf(',') + 1),
-        referenceNumber: `${formData.referenceNumber}`,
-      }),
-    });
+
+    const opts = {
+      errorCorrectionLevel: 'H',
+      type: 'image/jpeg',
+      quality: 1,
+      margin: 1,
+      version : 10
+    }
+
+
+ QRCode.toDataURL(formData.toString(),opts).then((url) => {
+    emailjs
+      .send(
+        "service_78hl11d",
+        "template_8o5otb5",
+        { name: formData.name, email: formData.email, phoneNumber: formData.phone, faceDescriptor: Array.from(landmarks), faceImage: formData.image.substr(formData.image.indexOf(',') + 1), referenceNumber: `${formData.referenceNumber}`, QR : url},
+        "vm560Na-jpvQwtapD"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    })
   };
 
   useEffect(() => {

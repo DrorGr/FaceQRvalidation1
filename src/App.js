@@ -30,7 +30,7 @@ function App() {
           <Route index path='/*' element={<LoginPage />} />
           <Route exact path='/Home' element={<HomePage />} />
           <Route exact path='/Verification' element={<VerificationPage />} />
-          <Route path='/Registration' element={<RegistrationPage />} />
+          <Route exact path='/Registration' element={<RegistrationPage />} />   
         </Routes>
       </SnackbarProvider>
     </>

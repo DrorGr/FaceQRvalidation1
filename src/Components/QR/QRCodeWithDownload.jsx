@@ -90,10 +90,7 @@ const QRCodeWithDownload = ({ value }) => {
       >
         <QRCode id="qrcode" value={value} style={{ width: 300, height: 300 }} />
       </div>
-      <br />
-      <br />
-      <ShareButton />
-      <br />
+
     </div>
   );
 };

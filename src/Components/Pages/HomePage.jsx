@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import { Container } from '@mui/material';
 import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material';
-import logo from '../logo.png';
+import logo from '../logo.jpg';
 import { useNavigate } from 'react-router-dom';
 import Group from '../../assets/Images/Group.svg';
 import Path from '../../assets/Images/Path.svg';
