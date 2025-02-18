@@ -71,7 +71,7 @@ function LoginPage() {
         }}
       >
         <Typography
-          mt={5}
+          mt={8}
           gap={2}
           mb={3}
           color='#294f75'
@@ -86,7 +86,7 @@ function LoginPage() {
             component='img'
             src={logo}
             sx={{
-              height: '60%',
+              width: '60%',
             }}
           />
           Certificate Issuing Application
