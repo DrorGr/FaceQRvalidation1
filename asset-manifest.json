@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/FaceQRvalidation1/static/css/main.403b6d02.css",
-    "main.js": "/FaceQRvalidation1/static/js/main.3652f7d0.js",
-    "static/js/787.490f4d38.chunk.js": "/FaceQRvalidation1/static/js/787.490f4d38.chunk.js",
+    "main.js": "/FaceQRvalidation1/static/js/main.6bca47f3.js",
+    "static/js/787.0a9e8f01.chunk.js": "/FaceQRvalidation1/static/js/787.0a9e8f01.chunk.js",
+    "static/media/logo.jpg": "/FaceQRvalidation1/static/media/logo.5a0b4c700c9c81d8c34f.jpg",
     "service-worker.js": "/FaceQRvalidation1/service-worker.js",
-    "static/media/logo.png": "/FaceQRvalidation1/static/media/logo.59a400ce1970e7e303f4.png",
     "static/media/Path.svg": "/FaceQRvalidation1/static/media/Path.d0143938681b9918ac93e71b41e7975f.svg",
     "index.html": "/FaceQRvalidation1/index.html",
     "static/media/Group.svg": "/FaceQRvalidation1/static/media/Group.dca7cf4a92b83010bdab941694d92ffc.svg",
     "main.403b6d02.css.map": "/FaceQRvalidation1/static/css/main.403b6d02.css.map",
-    "main.3652f7d0.js.map": "/FaceQRvalidation1/static/js/main.3652f7d0.js.map",
-    "787.490f4d38.chunk.js.map": "/FaceQRvalidation1/static/js/787.490f4d38.chunk.js.map"
+    "main.6bca47f3.js.map": "/FaceQRvalidation1/static/js/main.6bca47f3.js.map",
+    "787.0a9e8f01.chunk.js.map": "/FaceQRvalidation1/static/js/787.0a9e8f01.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.403b6d02.css",
-    "static/js/main.3652f7d0.js"
+    "static/js/main.6bca47f3.js"
   ]
 }
