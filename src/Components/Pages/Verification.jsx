@@ -44,6 +44,7 @@ function VerificationPage() {
   };
 
   const handleDeCompressData = (data) => {
+    console.log(data)
     const uzQr = myLogic.unzip(data);
     if (uzQr !== -1) {
       // setQrData(myLogic.unzip(data));

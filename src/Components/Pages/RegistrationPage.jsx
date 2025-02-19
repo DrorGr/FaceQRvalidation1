@@ -7,9 +7,8 @@ import VerticalLinearStepper from '../Stepper';
 import Summery from '../SummeryDetails/Summery';
 import * as faceapi from 'face-api.js';
 import emailjs from '@emailjs/browser';
-import QRCodeWithDownload from '../QR/QRCodeWithDownload';
 import QRCode from 'qrcode'
-import { toPng } from 'html-to-image';
+
 
 
 
@@ -21,7 +20,7 @@ function RegistrationPage() {
     email: '',
     phone: '',
     image: '',
-    referenceNumber: Math.ceil(Math.random() * 99999999),
+    referenceNumber: Math.ceil(Math.random() * 99999999).toString(),
   });
 
   const sendData = (e) => {
@@ -35,9 +34,16 @@ function RegistrationPage() {
       margin: 1,
       version : 10
     }
+    const data = {
+      "name": formData.name,
+      "email": formData.email,
+      "phoneNumber": formData.phone,
+      "faceDescriptor": Array.from(landmarks),
+      "faceImage": formData.image.substr(formData.image.indexOf(',') + 1),
+      "referenceNumber": `${formData.referenceNumber}`,
+    };
 
-
- QRCode.toDataURL(formData.toString(),opts).then((url) => {
+ QRCode.toDataURL(data,opts).then((url) => {
     emailjs
       .send(
         "service_78hl11d",

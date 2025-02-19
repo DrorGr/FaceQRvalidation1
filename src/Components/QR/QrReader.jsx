@@ -11,7 +11,7 @@ function QrReader({ qrData, next }) {
   const handleOpenCamera = () => {
     setCameraOpen(true);
   };
-
+  
   const handleCloseCamera = () => {
     setCameraOpen(false);
   };
@@ -38,6 +38,7 @@ function QrReader({ qrData, next }) {
             ref={scannerRef}
             onDecode={handleDecode}
             onError={handleError}
+            tracker= {true}
             style={{ height: window.innerHeight * 0.1 }}
           />
         )}
