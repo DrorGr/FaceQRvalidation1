@@ -36,9 +36,8 @@ function QrReader({ qrData, next }) {
         {cameraOpen && (
           <QrScanner
             ref={scannerRef}
-            onDecode={handleDecode}
+            onResult={handleDecode}
             onError={handleError}
-            tracker= {true}
             style={{ height: window.innerHeight * 0.1 }}
           />
         )}

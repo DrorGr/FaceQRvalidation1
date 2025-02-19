@@ -48,6 +48,7 @@ const FaceRecognition = ({ setFormData, onLandmarksDetected, formData }) => {
 
   const stopCamera = () => {
     setIsCameraStarted(false);
+    
   };
 
   const onSwitchCamera = () => {

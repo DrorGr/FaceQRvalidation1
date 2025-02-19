@@ -8,6 +8,8 @@ import Summery from '../SummeryDetails/Summery';
 import * as faceapi from 'face-api.js';
 import emailjs from '@emailjs/browser';
 import QRCode from 'qrcode'
+import pako from "pako";
+import msgpack from "msgpack-lite";
 
 
 
@@ -32,23 +34,32 @@ function RegistrationPage() {
       type: 'image/jpeg',
       quality: 1,
       margin: 1,
-      version : 10
+      version : 32,
+      size : 256
     }
-    const data = {
-      "name": formData.name,
-      "email": formData.email,
-      "phoneNumber": formData.phone,
-      "faceDescriptor": Array.from(landmarks),
-      "faceImage": formData.image.substr(formData.image.indexOf(',') + 1),
-      "referenceNumber": `${formData.referenceNumber}`,
-    };
 
- QRCode.toDataURL(data,opts).then((url) => {
+    
+  function CompressedQR() {
+
+    const packed = msgpack.encode({
+      name : formData.name,
+      email : formData.email,
+      phone : formData.phone,
+      referenceNumber : formData.referenceNumber,
+      landmarks : landmarks,
+    });
+    const compressedData = pako.deflate(packed);
+    const base64Data = btoa(String.fromCharCode(...compressedData));
+
+  return base64Data
+  }  
+
+ QRCode.toDataURL(CompressedQR(),opts).then((url) => {
     emailjs
       .send(
         "service_78hl11d",
         "template_8o5otb5",
-        { name: formData.name, email: formData.email, phoneNumber: formData.phone, faceDescriptor: Array.from(landmarks), faceImage: formData.image.substr(formData.image.indexOf(',') + 1), referenceNumber: `${formData.referenceNumber}`, QR : url},
+        { name: formData.name, email: formData.email, phoneNumber: formData.phone, referenceNumber: `${formData.referenceNumber}`, QR : url},
         "vm560Na-jpvQwtapD"
       )
       .then(
