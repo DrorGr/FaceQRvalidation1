@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-export default function VerticalLinearStepper({ steps, reset, aStep, sendData, options }) {
+export default function VerticalLinearStepper({ steps, reset, aStep, sendData, options , style}) {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ export default function VerticalLinearStepper({ steps, reset, aStep, sendData, o
         boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
         p: 2,
         borderRadius: 5,
+        ...style
       }}
     >
       <Stepper activeStep={activeStep} orientation='vertical'>
@@ -56,7 +57,7 @@ export default function VerticalLinearStepper({ steps, reset, aStep, sendData, o
                     </Button>
                   )}
                   {index === 2 && (
-                    <Box display='flex' flexDirection='row' width='100%' justifyContent='space-around'>
+                    <Box display='flex' flexDirection='row' width='100%' justifyContent='space-around' mt={10}>
                       <Button
                         variant='contained'
                         onClick={sendData}

@@ -71,9 +71,10 @@ const FaceVerification = ({ photoDescriptor, next }) => {
           .withFaceExpressions()
           .withFaceDescriptors();
 
-        if (detections.length > 0) {
+        if (detections?.length > 0) {
           const videoFaceDescriptor = detections[0].descriptor;
           const photoFaceDescriptor = photoDescriptor;
+
           setColor(
             detections[0]
               ? [
@@ -84,9 +85,8 @@ const FaceVerification = ({ photoDescriptor, next }) => {
               : 'red'
           );
 
-          const distance = faceapi.euclideanDistance(videoFaceDescriptor, photoFaceDescriptor);
 
-          if (detections[0]?.detection._score > 0.8 && distance < 0.8) {
+          if (detections[0]?.detection?._score > 0.8) {
             setIsCameraStarted(false);
             stopCamera();
             setDetected(true);

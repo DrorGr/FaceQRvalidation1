@@ -46,7 +46,7 @@ function RegistrationPage() {
       email : formData.email,
       phone : formData.phone,
       referenceNumber : formData.referenceNumber,
-      landmarks : landmarks,
+      // landmarks : landmarks,
     });
     const compressedData = pako.deflate(packed);
     const base64Data = btoa(String.fromCharCode(...compressedData));

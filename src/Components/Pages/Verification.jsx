@@ -84,12 +84,12 @@ const unpacked = msgpack.decode(decompressed)
       content: (
         <div style={{ textAlignLast: 'center', color: 'black' }}>
           {qrData !== '' && (
-            <List>
+            <List disablePadding={true}>
               {Object.keys(qrData).map(
                 (key, index) =>
-                  key !== 'photoDescriptor' && (
-                    <ListItem key={index} color='black'>
-                      <ListItemText primary={key} secondary={<Typography color='black'>{qrData[key]}</Typography>} />
+                  key !== 'photoDescriptor' && key !== 'image' && (
+                    <ListItem key={index} color='black' style={{'padding':0}} >
+                      <ListItemText primary={key.replace(key[0],key[0].toUpperCase( ))} secondary={<Typography color='black'>{qrData[key]}</Typography>} />
                     </ListItem>
                   )
               )}
@@ -105,6 +105,7 @@ const unpacked = msgpack.decode(decompressed)
         <Typography m={2} sx={{ fontFamily: 'Segoe UI', textAlign: 'center', color: 'black' }} variant='h4'>
           Verification
         </Typography>
+
         <VerticalLinearStepper
           steps={steps}
           reset={handleReset}
@@ -112,6 +113,7 @@ const unpacked = msgpack.decode(decompressed)
           sendData={() => navigate('/Home', { replace: true })}
           options={['Verify again', 'Back to home']}
         />
+
       </Container>
     </>
   );

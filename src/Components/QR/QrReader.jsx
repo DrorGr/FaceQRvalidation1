@@ -17,11 +17,13 @@ function QrReader({ qrData, next }) {
   };
 
   const handleDecode = (result) => {
+    alert(result);
     qrData(result);
     handleCloseCamera();
   };
 
   const handleError = (error) => {
+    alert(error?.message);
     console.log(error?.message);
   };
 
@@ -36,6 +38,8 @@ function QrReader({ qrData, next }) {
         {cameraOpen && (
           <QrScanner
             ref={scannerRef}
+            tracker={true}
+            hideCount={false}
             onResult={handleDecode}
             onError={handleError}
             style={{ height: window.innerHeight * 0.1 }}
