@@ -92,7 +92,7 @@ const FaceVerification = ({ photoDescriptor, next }) => {
             setDetected(true);
             clearInterval(intervalId);
             next();
-            enqueueSnackbar('Person Validate Successful', {
+            enqueueSnackbar('Person Validated', {
               variant: 'success',
               autoHideDuration: 2000,
             });

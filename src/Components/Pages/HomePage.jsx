@@ -39,7 +39,6 @@ const pages = [
     icon: Path,
     cardColor: '#319ba1',
   },
-  // { title: "MISSING", link: "/missing", icon: <SpatialAudioIcon /> },
 ];
 
 function HomePage() {

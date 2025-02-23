@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import VerticalLinearStepper from '../Stepper';
-import Logic from '../../Logic/Logic';
 import QrReader from '../QR/QrReader';
 import FaceVerification from '../Face/FaceVerification';
 import { useNavigate } from 'react-router';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import * as faceapi from 'face-api.js';
-import { useSnackbar } from 'notistack';
 import pako from "pako";
 import msgpack from "msgpack-lite";
 
@@ -18,10 +16,8 @@ function VerificationPage() {
     phone: '',
     image: '',
     referenceNumber: Math.ceil(Math.random() * 99999999).toString(),});
-   const [landmarks, setLandmarks] = useState([0]);
+  const [landmarks, setLandmarks] = useState([0]);
   const [activeStep, setActiveStep] = useState(0);
-  const myLogic = new Logic();
-  const { enqueueSnackbar } = useSnackbar();
   let data ;
   const navigate = useNavigate();
 
@@ -48,14 +44,13 @@ function VerificationPage() {
   const handleReset = () => {
     setActiveStep(0);
     setQrData('');
-    console.log('reset');
   };
 
   const handleDeCompressData = (data1) => {
 
     const compressedBytes = Uint8Array.from(atob(data1), c => c.charCodeAt(0));
-const decompressed = pako.inflate(compressedBytes);
-const unpacked = msgpack.decode(decompressed)
+    const decompressed = pako.inflate(compressedBytes);
+    const unpacked = msgpack.decode(decompressed)
 
     setQrData({
       name: unpacked.name,
@@ -64,10 +59,11 @@ const unpacked = msgpack.decode(decompressed)
       image: unpacked.image,
       referenceNumber: unpacked.referenceNumber,
     })
+
     setLandmarks(unpacked.landmarks);
     data= unpacked
-    console.log(data?.landmarks)
     handleNext(1);
+    
   };
 
   const steps = [ 

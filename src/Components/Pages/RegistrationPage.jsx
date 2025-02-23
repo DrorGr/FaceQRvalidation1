@@ -10,7 +10,8 @@ import emailjs from '@emailjs/browser';
 import QRCode from 'qrcode'
 import pako from "pako";
 import msgpack from "msgpack-lite";
-
+import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 
 
@@ -25,19 +26,19 @@ function RegistrationPage() {
     referenceNumber: Math.ceil(Math.random() * 99999999).toString(),
   });
 
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+
   const sendData = (e) => {
     e.preventDefault();
-
 
     const opts = {
       errorCorrectionLevel: 'H',
       type: 'image/jpeg',
       quality: 1,
       margin: 1,
-      version : 32,
       size : 256
     }
-
     
   function CompressedQR() {
 
@@ -46,8 +47,9 @@ function RegistrationPage() {
       email : formData.email,
       phone : formData.phone,
       referenceNumber : formData.referenceNumber,
-      // landmarks : landmarks,
+      landmarks : landmarks,
     });
+
     const compressedData = pako.deflate(packed);
     const base64Data = btoa(String.fromCharCode(...compressedData));
 
@@ -63,11 +65,18 @@ function RegistrationPage() {
         "vm560Na-jpvQwtapD"
       )
       .then(
-        (result) => {
+        (result) => { enqueueSnackbar('Registered Successfuly', {
+              variant: 'success',
+              autoHideDuration: 2000,
+            });
+          navigate('/Home', { replace: true })
           console.log(result.text);
         },
         (error) => {
-          console.log(error.text);
+          enqueueSnackbar(error, {
+            variant: 'error',
+            autoHideDuration: 2000,
+          });
         }
       );
     })
