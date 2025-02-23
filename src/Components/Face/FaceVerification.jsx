@@ -49,6 +49,10 @@ const FaceVerification = ({ photoDescriptor, next }) => {
   };
   const stopCamera = () => {
     setIsCameraStarted(false);
+    if (!videoRef.current) return;
+    const tracks = videoRef.current.srcObject.getTracks();
+    tracks.forEach((track) => track.stop());
+    videoRef.current.srcObject = null;
   };
 
   useEffect(() => {
@@ -92,16 +96,17 @@ const FaceVerification = ({ photoDescriptor, next }) => {
             setDetected(true);
             clearInterval(intervalId);
             next();
-            enqueueSnackbar('Person Validated', {
-              variant: 'success',
-              autoHideDuration: 2000,
-            });
+          
           }
         }
       };
 
       intervalId = setInterval(() => {
         detectFaces();
+        enqueueSnackbar('Person Validated', {
+          variant: 'success',
+          autoHideDuration: 2000,
+        });
       }, 100);
     }
 

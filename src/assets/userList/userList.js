@@ -3,4 +3,5 @@ export const userList = [
   { username: 'University', password: 'University' },
   { username: 'Medical', password: 'Medical' },
   { username: 'Police', password: 'Police' },
+{ username: 'Admin', password: 'Admin' },
 ];

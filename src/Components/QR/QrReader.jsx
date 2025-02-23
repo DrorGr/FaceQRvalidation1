@@ -2,12 +2,13 @@ import React, { useState, useRef } from 'react';
 import { QrScanner } from '@yudiel/react-qr-scanner';
 import Button from '@mui/material/Button';
 import { useMediaQuery } from '@mui/material';
+import { useSnackbar } from 'notistack';
 
 function QrReader({ qrData, next }) {
   const [cameraOpen, setCameraOpen] = useState(true);
   const scannerRef = useRef();
   const isSmallScreen = useMediaQuery('(max-width:600px)'); // Change 600px to your desired breakpoint
-
+const { enqueueSnackbar } = useSnackbar();
   const handleOpenCamera = () => {
     setCameraOpen(true);
   };
@@ -17,13 +18,13 @@ function QrReader({ qrData, next }) {
   };
 
   const handleDecode = (result) => {
-    alert(result);
+    enqueueSnackbar('QR code read successfully', { variant: 'success' });
     qrData(result);
     handleCloseCamera();
   };
 
   const handleError = (error) => {
-    alert(error?.message);
+    enqueueSnackbar('Error reading QR code', { variant: 'error' });
     console.log(error?.message);
   };
 
