@@ -33,11 +33,11 @@ function RegistrationPage() {
     e.preventDefault();
 
     const opts = {
-      errorCorrectionLevel: 'H',
+      // errorCorrectionLevel: 'H',
       type: 'image/jpeg',
       quality: 1,
-      margin: 1,
-      size : 256
+      // margin: 1,
+      // size : 256
     }
     
   function CompressedQR() {
