@@ -42,18 +42,16 @@ const FaceVerification = ({ photoDescriptor, next }) => {
       tracks.forEach((track) => track.stop());
       videoRef.current.srcObject = null;
     };
-  }, []);
+  }, [isFrontCamera]);
 
   const onSwitchCamera = () => {
     setIsFrontCamera((prev) => !prev);
   };
   const stopCamera = () => {
     setIsCameraStarted(false);
-    if (!videoRef.current) return;
-    const tracks = videoRef.current.srcObject.getTracks();
-    tracks.forEach((track) => track.stop());
-    videoRef.current.srcObject = null;
   };
+
+
 
   useEffect(() => {
     let intervalId;
@@ -96,21 +94,24 @@ const FaceVerification = ({ photoDescriptor, next }) => {
             setDetected(true);
             clearInterval(intervalId);
             next();
-          
+
+            enqueueSnackbar('Person Validate Successful', {
+              variant: 'success',
+              autoHideDuration: 2000,
+              preventDuplicate: true,
+            });
+           
           }
         }
       };
 
       intervalId = setInterval(() => {
         detectFaces();
-        enqueueSnackbar('Person Validated', {
-          variant: 'success',
-          autoHideDuration: 2000,
-        });
-      }, 100);
+      }, 300);
     }
 
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId)};
   }, [ isCameraStarted]);
 
   return (
@@ -148,9 +149,11 @@ const FaceVerification = ({ photoDescriptor, next }) => {
               style={{ position: 'absolute', top: 0, left: 0, visibility: 'hidden' }}
             />
             {isCameraStarted && (
+              <>
               <IconButton onClick={onSwitchCamera} color='primary'>
                 <SwitchCamera />
               </IconButton>
+              </>
             )}
           </div>
         </Grid>

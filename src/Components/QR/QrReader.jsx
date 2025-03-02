@@ -40,7 +40,6 @@ const { enqueueSnackbar } = useSnackbar();
           <QrScanner
             ref={scannerRef}
             tracker={true}
-            hideCount={false}
             onResult={handleDecode}
             onError={handleError}
             style={{ height: window.innerHeight * 0.1 }}

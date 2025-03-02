@@ -35,7 +35,7 @@ function RegistrationPage() {
     const opts = {
       // errorCorrectionLevel: 'H',
       type: 'image/jpeg',
-      quality: 1,
+      // quality: 1,
       // margin: 1,
       // size : 256
     }
@@ -69,17 +69,18 @@ function RegistrationPage() {
               variant: 'success',
               autoHideDuration: 2000,
             });
-          navigate('/Home', { replace: true })
-          console.log(result.text);
-        },
-        (error) => {
-          enqueueSnackbar(error, {
-            variant: 'error',
-            autoHideDuration: 2000,
-          });
-        }
-      );
-    })
+            console.log(result.text);
+          },
+          (error) => {
+            enqueueSnackbar(error, {
+              variant: 'error',
+              autoHideDuration: 2000,
+            });
+          }
+        )
+        
+      })
+      navigate('/Home', { replace: true })
   };
 
   useEffect(() => {

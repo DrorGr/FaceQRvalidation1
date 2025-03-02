@@ -47,13 +47,7 @@ const FaceRecognition = ({ setFormData, onLandmarksDetected, formData }) => {
   }, [isFrontCamera]);
 
   const stopCamera = () => {
-
     setIsCameraStarted(false);
-
-    if (!videoRef.current) return;
-    const tracks = videoRef.current.srcObject.getTracks();
-    tracks.forEach((track) => track.stop());
-    videoRef.current.srcObject = null;
     
   };
 
